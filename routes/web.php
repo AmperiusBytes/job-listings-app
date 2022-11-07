@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Listing;
 use PhpParser\Node\Expr\List_;
@@ -16,15 +17,15 @@ use PhpParser\Node\Expr\List_;
 */
 
 //All Listings
-Route::get('/', function () {
-    return view('listings', [
-        'heading' => 'Lastest Listings',
-        'listings' => Listing::all()
-    ]);
-});
+Route::get('/', [ListingController::class, 'index']); 
 
-Route::get('/listing/{id}', function($id) {
-    return view('listing', [
-        'listing' => Listing::find($id)
-    ]);
-});
+Route::get('/listing/{listing}', [ListingController::class, 'show']);
+
+//  Common Resource Routes:
+//  index - Show all listings
+//  show - Show single listing
+//  create - Show form to create new listing
+//  store - Store new listing
+//  edit - Show form to edit listing
+//  update - Update listing
+//  destroy - Delete listing
